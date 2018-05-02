@@ -1,0 +1,269 @@
+/* Utility */
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.v-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cp {
+  cursor: pointer;
+}
+
+/* Slide */
+.slideContent {
+  padding: 0 2px;
+}
+
+/* Thumbnail */
+.thumbnail:after {
+  content: '';
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+.thumbnailButton {
+  width: 30px;
+  height: 30px;
+  box-sizing: content-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: gray;
+  transition: transform 200ms;
+}
+
+.thumbnailButton:hover {
+  border-color: white;
+  transform: scale(1.15);
+}
+
+.thumbnailButton > i {
+  line-height: 30px;
+}
+
+.playButton {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: white;
+  transition: border-color 200ms;
+}
+
+.playButton > i {
+  transition: color 200ms;
+  color: #e7040f;
+}
+
+.playButton.dim {
+  border-color: rgba(170, 170, 170, 0.2);
+}
+
+.playButton.dim > i {
+  color: rgba(170, 170, 170, 0.2);
+}
+
+.playIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30px;
+}
+
+/* Slider */
+.slider:hover > .sliderButton {
+  opacity: 1;
+}
+
+/* Slider Button */
+.sliderButton {
+  opacity: 0;
+  transition: opacity 100ms;
+}
+
+.sliderButtonIcon {
+  transition: transform 200ms;
+}
+
+.sliderButtonIcon:hover {
+  transform: scale(1.2) translate(-50%, -50%);
+}
+
+.hoverToLeft {
+  transform: translateX(-47.5%);
+}
+
+.hoverToRight {
+  transform: translateX(47.5%);
+}
+.hoverEndToLeft {
+  transform: translateX(-95%);
+}
+
+.hoverEndToRight {
+  transform: translateX(95%);
+}
+
+/* Intro */
+.intro:after {
+  content: '';
+  width: 100%;
+  height: 40%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(20, 20, 20, 0), rgba(20, 20, 20, 1));
+}
+
+.introButton {
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+.introButton:hover {
+  background-color: white;
+}
+
+.introButton:hover > i {
+  color: black;
+}
+
+.introButton:hover > div {
+  color: black;
+}
+
+.introTitle {
+  top: 35%;
+}
+
+/* Secondary Nav */
+
+.searchField {
+  border: none;
+  outline: none;
+}
+
+.dropdown {
+  width: 170px;
+  top: 50px;
+  right: 0;
+}
+
+.dropdown:before {
+  --size: 8px;
+  position: absolute;
+  top: calc(var(--size) * -1);
+  right: 8px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid #cccccc;
+}
+
+i.fa-bell:after {
+  content: '6';
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background-color: #e7040f;
+  position: absolute;
+  color: white;
+  text-align: center;
+  line-height: 18px;
+  font-size: 15px;
+  top: -6px;
+  left: 6px;
+}
+
+/* Header */
+.nav {
+  height: 44px;
+}
+/* Primary Nav */
+
+.menuMobile {
+  width: 200px;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 3px solid #ccc;
+}
+
+.menuMobile:before {
+  --size: 8px;
+  content: '';
+  position: absolute;
+  top: calc(var(--size) * -1);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid #ccc;
+}
+
+.menuMobile li:hover {
+  background-color: #222;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .nav {
+    height: 70px;
+  }
+
+  .dropdown {
+    top: 70px;
+  }
+
+  .menuMobile {
+    top: 60px;
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .introTitle > h1 {
+    font-size: 3.7rem;
+  }
+
+  .dropdown:before {
+    right: 27px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .introTitle > h1 {
+    font-size: 5rem;
+  }
+}
+.loader {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  /* height: 100vh; */
+  background-color: black;
+  z-index: 999;
+}
+.loader > .spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
