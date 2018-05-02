@@ -23,6 +23,7 @@ class Header extends Component {
     }
   };
 
+  /* TODO bg color opacity and when scroll update to solid black */
   render() {
     const { show, border } = this.state;
     return (
