@@ -5,9 +5,6 @@ import SlideVideo from './SlideVideo';
 import classNames from 'classnames';
 import axios from 'axios';
 
-const hoverRatio = 1.95;
-const hoverOffset = -hoverRatio + 1;
-
 const defaultStyles = {
   width: '100%',
   height: '100%',
@@ -16,28 +13,28 @@ const defaultStyles = {
   top: '0',
 };
 
-const standardHoverStyles = {
-  left: `${hoverOffset * 50}%`,
-  top: `${hoverOffset * 50}%`,
-};
-
-const leftEndHoverStyles = {
-  top: `${hoverOffset * 50}%`,
-};
-const rightEndHoverStyle = {
-  top: `${hoverOffset * 50}%`,
-  left: `${hoverOffset * 100}%`,
-};
-
-const hoverSize = {
-  width: `${hoverRatio * 100}%`,
-  height: `${hoverRatio * 100}%`,
-};
-
 const videoState = {
   play: 'playVideo',
   pause: 'pauseVideo',
 };
+
+// const hoverRatio = 1.95;
+// const hoverOffset = -hoverRatio + 1;
+// const standardHoverStyles = {
+//   left: `${hoverOffset * 50}%`,
+//   top: `${hoverOffset * 50}%`,
+// };
+// const leftEndHoverStyles = {
+//   top: `${hoverOffset * 50}%`,
+// };
+// const rightEndHoverStyle = {
+//   top: `${hoverOffset * 50}%`,
+//   left: `${hoverOffset * 100}%`,
+// };
+// const hoverSize = {
+//   width: `${hoverRatio * 100}%`,
+//   height: `${hoverRatio * 100}%`,
+// };
 
 class Slide extends Component {
   constructor(props) {
@@ -54,6 +51,7 @@ class Slide extends Component {
       videoThumbnail: '',
       playVideo: false,
     };
+    this.setHoverStyles();
   }
 
   componentDidMount() {
@@ -74,6 +72,26 @@ class Slide extends Component {
     }
   }
 
+  setHoverStyles = () => {
+    const hoverRatio = window.screen.width > 1024 ? 1.95 : 1;
+    const hoverOffset = -hoverRatio + 1;
+    this.standardHoverStyles = {
+      left: `${hoverOffset * 50}%`,
+      top: `${hoverOffset * 50}%`,
+    };
+    this.leftEndHoverStyles = {
+      top: `${hoverOffset * 50}%`,
+    };
+    this.rightEndHoverStyle = {
+      top: `${hoverOffset * 50}%`,
+      left: `${hoverOffset * 100}%`,
+    };
+    this.hoverSize = {
+      width: `${hoverRatio * 100}%`,
+      height: `${hoverRatio * 100}%`,
+    };
+  };
+
   componentDidUpdate(prevState) {
     // Callback while hover on sliding
     if (this.hoverCallback) {
@@ -92,7 +110,7 @@ class Slide extends Component {
     } else {
       if (this.isVisibleSlide(pos)) {
         this.timeOutID = setTimeout(() => {
-          const hoverStyles = Object.assign(this.getStylesByPosition(pos), hoverSize);
+          const hoverStyles = Object.assign(this.getStylesByPosition(pos), this.hoverSize);
           this.performTransition(hoverStyles);
         }, timeout);
       }
@@ -114,11 +132,11 @@ class Slide extends Component {
     const { first, last } = this.props;
     switch (pos) {
       case first:
-        return leftEndHoverStyles;
+        return this.leftEndHoverStyles;
       case last:
-        return rightEndHoverStyle;
+        return this.rightEndHoverStyle;
       default:
-        return standardHoverStyles;
+        return this.standardHoverStyles;
     }
   };
 
@@ -127,7 +145,9 @@ class Slide extends Component {
       hover: !prevState.hover,
       hoverStyles: transitonStyles,
     }));
-    this.props.hover(this.props.pos);
+    if (window.screen.width > 1024) {
+      this.props.hover(this.props.pos);
+    }
   };
 
   toggleVideo = () => {
@@ -167,7 +187,10 @@ class Slide extends Component {
     const { width, hoverTimeout, type, height, movieData, imageBaseURL } = this.props;
     const transition = { transition: `all ${hoverTimeout}ms` };
     const overview = movieData.overview ? movieData.overview.split('.') : '';
-    const videoDimension = { width: width * 1.95, height: height * 1.95 };
+    const videoDimension =
+      window.screen.width > 1024
+        ? { width: width * 1.95, height: height * 1.95 }
+        : { width, height };
     const slideStyles = {
       width: `${width}px`,
       height: `${height}px`,

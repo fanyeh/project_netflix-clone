@@ -17,6 +17,7 @@ class Header extends Component {
     window.removeEventListener('scroll', this.changeBackground);
   }
 
+  /* Header bg opacity change when scrolling */
   changeBackground = () => {
     const { darkBackground } = this.state;
     const scrollY = window.scrollY;
@@ -42,7 +43,6 @@ class Header extends Component {
     }
   };
 
-  /* TODO bg color opacity and when scroll update to solid black */
   render() {
     const { show, border, darkBackground } = this.state;
     const bgColor = darkBackground ? 'bg-black' : 'bg-black-70';

@@ -18,7 +18,7 @@ class SearchField extends Component {
         <input
           type="text"
           placeholder="name , actor , type"
-          className="f5 pl2 bg-black searchField "
+          className="f5 pl2 bg-black searchField bg-transparent white"
           style={{ ...transitionStyle }}
           ref={elementRef}
           onBlur={clickHandler}
