@@ -1,1 +1,3 @@
-## This is a Netflix clone I build using React.
+# This is Netflix clone I built using React.
+
+## [Live Demo](http://jffy-netflix-clone.surge.sh/)
