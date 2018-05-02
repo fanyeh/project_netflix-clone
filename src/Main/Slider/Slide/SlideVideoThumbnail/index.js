@@ -27,6 +27,7 @@ class SlideVideoThumbnail extends Component {
       this.defaultStyle.backgroundImage = `url(${this.props.thumbnail})`;
     }
   }
+  /* TODO Cetner video play icon and remove overview on small screen */
 
   render() {
     const { clickHandler, title, description, show } = this.props;

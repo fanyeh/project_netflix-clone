@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import PrimaryNav from './PrimaryNav';
 import SecondaryNav from './SecondaryNav';
+import classNames from 'classnames';
 class Header extends Component {
   constructor(props) {
     super(props);
     this.inputElement = React.createRef();
-    this.state = { show: false, border: false };
+    this.state = { show: false, border: false, darkBackground: false };
   }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.changeBackground);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.changeBackground);
+  }
+
+  changeBackground = () => {
+    const { darkBackground } = this.state;
+    const scrollY = window.scrollY;
+    if (scrollY >= 70 && !darkBackground) {
+      this.setState({ darkBackground: true });
+    } else if (scrollY < 70 && darkBackground) {
+      this.setState({ darkBackground: false });
+    }
+  };
 
   showInput = () => {
     if (this.state.border) {
@@ -25,9 +44,13 @@ class Header extends Component {
 
   /* TODO bg color opacity and when scroll update to solid black */
   render() {
-    const { show, border } = this.state;
+    const { show, border, darkBackground } = this.state;
+    const bgColor = darkBackground ? 'bg-black' : 'bg-black-70';
     return (
-      <header className="fixed z-5 w-100 bg-black absolute">
+      <header
+        className={classNames('fixed z-5 w-100 absolute', bgColor)}
+        style={{ transition: `background-color 200ms` }}
+      >
         <nav className="relative nav">
           <PrimaryNav />
           <SecondaryNav
